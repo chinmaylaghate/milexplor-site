@@ -789,28 +789,6 @@ section { position: relative; overflow: clip }
 </section>
 </main>
 
-<button class="notes-btn" id="notesBtn" aria-expanded="false" aria-controls="notes"><svg><use href="#i-motion"/></svg>Motion notes</button>
-<aside class="notes" id="notes" hidden aria-label="Motion notes">
-  <h3>Motion notes</h3>
-  <p class="small">Speeds are relative to scroll. 1x moves with the page. Phones are 1x unless noted. Mobile halves every offset. Reduce motion turns all of it off and uses fades.</p>
-  <div class="seg-ctl" role="group" aria-label="Hero frame">
-    <button id="hf-live" aria-pressed="true">Live scroll</button>
-    <button id="hf-start" aria-pressed="false">Hero: start</button>
-    <button id="hf-clear" aria-pressed="false">Hero: fog cleared</button>
-  </div>
-  <dl>
-    <dt>1. Hero</dt><dd>Real dark map and fog <code>0.3x</code>. The fog opens in a widening circle from the lit Bay Area roads (120px to 1100px radius) over the first 70% of the hero. Three phones: the center one rises 90px to 0, the tilted side phones move at <code>1.1x</code>. Chips <code>1.15x</code> to <code>1.35x</code>.</dd>
-    <dt>2. Odometer</dt><dd>Glow <code>0.7x</code>. Number counts 0 to 42.0 in 1.6s when it enters view (ease out). Mode tiles <code>1.1x</code>, <code>1.2x</code>, <code>1.3x</code>.</dd>
-    <dt>3. Map</dt><dd>Map layer <code>0.9x</code> (almost still). Fog curtain slides right, 0 to 110% of width, as the section moves from 85% to 0% of the viewport. Summary phone <code>1.12x</code>. Curtain uses fog color at 88% for contrast; the in-app fog stays 51%.</dd>
-    <dt>4. Just tap Start</dt><dd>Phone pinned in the center (sticky). Screen crossfades in 0.45s when the next step crosses the middle of the viewport. Mobile: plain list, one phone per step, no pinning.</dd>
-    <dt>5. Story</dt><dd>Five map snippets from the app (trip maps and Pro map styles) start scattered at their own depth (<code>0.8x</code> to <code>1.3x</code>), then ease into one straight strip as the section reaches the middle of the screen.</dd>
-    <dt>6. Badges</dt><dd>Each badge starts 120 to 280px low and rises with a small staggered overshoot (ease out back) into the grid.</dd>
-    <dt>7. Share</dt><dd>Share card slides out from behind the phone (up to 240px), turns 18 degrees toward the viewer and tilts 4 degrees. Year in review cards stay still and aligned.</dd>
-    <dt>8. Privacy</dt><dd>Lock photo <code>0.6x</code> behind a dark scrim, nothing else moves.</dd>
-    <dt>9. Pro</dt><dd>One row of real map style tiles from the Map style screen slides sideways, about 0.25x of scroll distance.</dd>
-    <dt>10 and 11</dt><dd>Widget fades in. Final map <code>0.7x</code>.</dd>
-  </dl>
-</aside>
 
 <script>
 (() => {
@@ -982,14 +960,16 @@ section { position: relative; overflow: clip }
 
   /* motion notes panel */
   const btn = $('#notesBtn'), panel = $('#notes');
-  btn.addEventListener('click', () => { panel.hidden = !panel.hidden; btn.setAttribute('aria-expanded', String(!panel.hidden)); });
-  const hf = { 'hf-live': null, 'hf-start': 0, 'hf-clear': 1 };
-  Object.keys(hf).forEach(id => $('#' + id).addEventListener('click', () => {
-    heroOverride = hf[id];
-    Object.keys(hf).forEach(o => $('#' + o).setAttribute('aria-pressed', String(o === id)));
-    if (heroOverride !== null) scrollTo({ top: 0, behavior: 'smooth' });
-    req();
-  }));
+  if (btn && panel) {
+    btn.addEventListener('click', () => { panel.hidden = !panel.hidden; btn.setAttribute('aria-expanded', String(!panel.hidden)); });
+    const hf = { 'hf-live': null, 'hf-start': 0, 'hf-clear': 1 };
+    Object.keys(hf).forEach(id => $('#' + id).addEventListener('click', () => {
+      heroOverride = hf[id];
+      Object.keys(hf).forEach(o => $('#' + o).setAttribute('aria-pressed', String(o === id)));
+      if (heroOverride !== null) scrollTo({ top: 0, behavior: 'smooth' });
+      req();
+    }));
+  }
 })();
 </script>
 
