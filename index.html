@@ -368,27 +368,6 @@ section { position: relative; overflow: clip }
 .notes dd { margin: 2px 0 0; color: var(--fg2); line-height: 1.45 }
 .notes code { font: 600 12.5px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--bg); padding: 1px 6px; border-radius: 6px; color: var(--fg) }
 
-/* ---------- Get notified ---------- */
-.notify { background: radial-gradient(70% 90% at 50% 0%, rgba(0,145,255,.16), transparent 70%), var(--n-bg) }
-.notify-inner { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px }
-.notify-inner .lede { max-width: 32em }
-.soon-n { background: rgba(0,210,224,.14); color: var(--teal) }
-.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
-.notify-form { display: flex; gap: 10px; width: 100%; max-width: 520px; margin-top: 8px }
-.notify-form input { flex: 1; min-width: 0; height: 56px; padding: 0 22px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); background: var(--n-cell); color: var(--n-fg); font: 17px var(--font) }
-.notify-form input::placeholder { color: var(--n-fg2); opacity: .8 }
-.notify-form input:focus-visible { outline: 3px solid var(--tint); outline-offset: 2px }
-.notify-form input[aria-invalid="true"] { border-color: #FF4245 }
-.notify-msg { min-height: 1.5em; font-size: 15px; color: var(--n-fg2) }
-.notify-msg.ok { color: var(--walk) }
-.notify-msg.err { color: #FF6A6C }
-.tf-card { display: flex; align-items: center; gap: 16px; margin-top: 28px; padding: 16px 16px 16px 18px; border-radius: var(--r-card); background: var(--n-cell); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); text-align: left; max-width: 640px; width: 100% }
-.tf-ic { width: 46px; height: 46px; flex: none; border-radius: 13px; display: grid; place-items: center; background: linear-gradient(160deg, #3DA5FF, #0066CC) }
-.tf-ic svg { width: 24px; height: 24px; fill: #fff }
-.tf-copy { flex: 1; min-width: 0; display: flex; flex-direction: column; font-size: 15px; color: var(--n-fg2) }
-.tf-copy b { color: var(--n-fg); font-size: 17px }
-.tf-card .btn { min-height: 46px; font-size: 16px; padding: 0 18px; flex: none }
-
 /* ---------- Responsive ---------- */
 @media (max-width: 960px) {
   .privacy::after { background: linear-gradient(180deg, rgba(0,0,0,.86) 0%, rgba(0,0,0,.7) 45%, rgba(0,0,0,.45) 100%) }
@@ -430,11 +409,6 @@ section { position: relative; overflow: clip }
   .step + .step { border-top: 1px solid var(--n-line) }
 }
 @media (max-width: 560px) {
-  .notify-form { flex-direction: column }
-  .notify-form input { flex: none }
-  .notify-form .btn { justify-content: center }
-  .tf-card { flex-wrap: wrap }
-  .tf-card .btn { width: 100%; justify-content: center }
   .nav .btn { padding: 0 14px; font-size: 14px }
   .pro-cards { grid-template-columns: minmax(0, 1fr) }
   .pro-cards .pc:first-child { grid-column: auto }
@@ -505,7 +479,7 @@ section { position: relative; overflow: clip }
       <a href="#badges">Badges</a>
       <a href="#privacy">Privacy</a>
     </nav>
-    <a class="btn btn-main" href="https://testflight.apple.com/join/D1VWEXNu"><svg><use href="#i-flight"/></svg>Test in TestFlight</a>
+    <a class="btn btn-main" href="https://apps.apple.com/us/app/milexplor/id6824304855"><svg><use href="#i-down"/></svg>Download app</a>
   </div>
 </header>
 
@@ -519,7 +493,7 @@ section { position: relative; overflow: clip }
       <h1 id="hero-h">Light up every road <span>you travel</span></h1>
       <p class="lede">Every drive, walk, and bike ride lights up your map. Watch your miles roll up, unlock badges, and share your trip stories.</p>
       <div class="btns">
-        <a class="btn btn-main" href="#notify"><svg><use href="#i-down"/></svg>Download on the App Store</a>
+        <a class="btn btn-main" href="https://apps.apple.com/us/app/milexplor/id6824304855"><svg><use href="#i-down"/></svg>Download on the App Store</a>
         <a class="btn btn-ghost" href="#how">See how it works</a>
       </div>
       <p class="trust"><svg><use href="#i-shield"/></svg>No login. Your trips stay on your phone.</p>
@@ -736,33 +710,13 @@ section { position: relative; overflow: clip }
   </div>
 </section>
 
-<!-- 10b. GET NOTIFIED -->
-<section class="band night notify" id="notify" aria-labelledby="notify-h">
-  <div class="wrap notify-inner">
-    <span class="soon soon-n"><svg width="14" height="14" fill="currentColor"><use href="#i-star"/></svg>Coming to the App Store</span>
-    <h2 id="notify-h">Be the first to know when it lands</h2>
-    <p class="lede">Leave your email and we will send one note when Milexplor is on the App Store. No spam, and you can unsubscribe anytime.</p>
-    <form class="notify-form" id="notifyForm" novalidate>
-      <label class="sr" for="notifyEmail">Email address</label>
-      <input id="notifyEmail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
-      <button class="btn btn-main" type="submit" id="notifyBtn">Notify me</button>
-    </form>
-    <p class="notify-msg" id="notifyMsg" role="status" aria-live="polite"></p>
-    <div class="tf-card">
-      <span class="tf-ic"><svg><use href="#i-star"/></svg></span>
-      <span class="tf-copy"><b>Coming up: Pro features</b><span>Premium map styles, 40 plus badges, advanced stats, and places explored. Try them early in the beta.</span></span>
-      <a class="btn btn-ghost" href="https://testflight.apple.com/join/D1VWEXNu">Try Pro early</a>
-    </div>
-  </div>
-</section>
-
 <!-- 11. CTA -->
 <section class="cta night" id="download" aria-labelledby="cta-h">
   <div class="mapbg" data-speed="0.7" id="ctaMap"><img src="images/bg-road.jpg" alt="" loading="lazy"></div>
   <div class="wrap">
     <h2 id="cta-h">Start your first trip today</h2>
     <p class="lede">Free on iPhone. Android is on the way.</p>
-    <a class="btn btn-main" href="#notify"><svg><use href="#i-down"/></svg>Download on the App Store</a>
+    <a class="btn btn-main" href="https://apps.apple.com/us/app/milexplor/id6824304855"><svg><use href="#i-down"/></svg>Download on the App Store</a>
     <p class="trust"><svg><use href="#i-shield"/></svg>No login. Your trips stay on your phone.</p>
     <footer class="foot">
       <a href="#top" aria-label="Milexplor, back to top"><svg class="logo" role="img" aria-label="Milexplor" viewBox="0 0 715 139" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -938,26 +892,6 @@ section { position: relative; overflow: clip }
   /* reduce-motion fades */
   const fio = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('in')), { threshold: .15 });
   $$('.fade').forEach(el => fio.observe(el));
-
-  /* ---------- App Store signup (Buttondown) ---------- */
-  // Paste the Buttondown username here to turn signups on
-  const BUTTONDOWN_USERNAME = 'keepset';
-  const nForm = $('#notifyForm'), nEmail = $('#notifyEmail'), nMsg = $('#notifyMsg'), nBtn = $('#notifyBtn');
-  const say = (text, kind) => { nMsg.textContent = text; nMsg.className = 'notify-msg' + (kind ? ' ' + kind : ''); };
-  nForm.addEventListener('submit', async e => {
-    e.preventDefault();
-    const email = nEmail.value.trim();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { nEmail.setAttribute('aria-invalid', 'true'); say('Enter an email address like you@example.com.', 'err'); nEmail.focus(); return; }
-    nEmail.removeAttribute('aria-invalid');
-    if (!BUTTONDOWN_USERNAME) { say('Signups open soon. Please check back in a few days.', 'err'); return; }
-    nBtn.disabled = true; say('Adding you to the list...');
-    try {
-      await fetch(`https://buttondown.com/api/emails/embed-subscribe/${encodeURIComponent(BUTTONDOWN_USERNAME)}`, { method: 'POST', mode: 'no-cors', body: new URLSearchParams({ email }) });
-      nForm.reset(); say("You're on the list. Check your inbox to confirm your email.", 'ok');
-    } catch {
-      say("That didn't go through. Check your connection and try again.", 'err');
-    } finally { nBtn.disabled = false; }
-  });
 
   /* motion notes panel */
   const btn = $('#notesBtn'), panel = $('#notes');
