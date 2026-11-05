@@ -31,6 +31,7 @@
 
 * { box-sizing: border-box }
 html { scroll-behavior: smooth }
+html, body { margin: 0; padding: 0 }
 body { background: var(--bg); color: var(--fg); font: 17px/1.5 var(--font); -webkit-font-smoothing: antialiased; overflow-x: clip }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: rgba(0,0,0,.72) }
 a { color: inherit }
@@ -748,9 +749,9 @@ section { position: relative; overflow: clip }
     </form>
     <p class="notify-msg" id="notifyMsg" role="status" aria-live="polite"></p>
     <div class="tf-card">
-      <span class="tf-ic"><svg><use href="#i-flight"/></svg></span>
-      <span class="tf-copy"><b>Can't wait?</b><span>Try the beta on your iPhone today with Apple's TestFlight app.</span></span>
-      <a class="btn btn-ghost" href="https://testflight.apple.com/join/D1VWEXNu">Test in TestFlight</a>
+      <span class="tf-ic"><svg><use href="#i-star"/></svg></span>
+      <span class="tf-copy"><b>Coming up: Pro features</b><span>Premium map styles, 40 plus badges, advanced stats, and places explored. Try them early in the beta.</span></span>
+      <a class="btn btn-ghost" href="https://testflight.apple.com/join/D1VWEXNu">Try Pro early</a>
     </div>
   </div>
 </section>
